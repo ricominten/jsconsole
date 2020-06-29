@@ -1,10 +1,10 @@
 /** @jsx jsx */
 
-import React  from 'react';
+import React from 'react';
 import { jsx } from '@emotion/core';
 import ObjectType from './ObjectType';
 
-const ErrorType = (props) => {
+const ErrorType = props => {
   const { value, shallow = true, filter, open, allowOpen } = props;
   const sig = value.name || value.constructor.name;
 

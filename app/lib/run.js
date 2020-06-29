@@ -1,4 +1,4 @@
-/*global document window */
+/* global document window */
 import { parse } from 'babylon';
 import * as walk from 'babylon-walk';
 
@@ -16,7 +16,7 @@ export const bindConsole = __console => {
     'warn',
     'assert',
     'debug',
-    'clear',
+    'clear'
   ];
 
   apply.forEach(method => {
@@ -55,7 +55,7 @@ export default async function run(command) {
   return new Promise(async resolve => {
     const res = {
       error: false,
-      command,
+      command
     };
 
     try {
@@ -89,7 +89,7 @@ export default async function run(command) {
         const doc = container.contentDocument;
         const script = doc.createElement('script');
         const blob = new Blob([additionalCode], {
-          type: 'application/javascript',
+          type: 'application/javascript'
         });
         script.src = URL.createObjectURL(blob);
         container.contentWindow.onerror = (message, file, line, col, error) => {
@@ -114,28 +114,28 @@ export default async function run(command) {
 }
 
 export function preProcess(content) {
-  var wrapped = '(async () => {' + content + '})()';
-  var root = parse(wrapped, { ecmaVersion: 8 });
-  var body = root.program.body[0].expression.callee.body;
+  let wrapped = `(async () => {${content}})()`;
+  const root = parse(wrapped, { ecmaVersion: 8 });
+  const { body } = root.program.body[0].expression.callee;
 
-  var changes = [];
-  var containsAwait = false;
-  var containsReturn = false;
+  const changes = [];
+  let containsAwait = false;
+  let containsReturn = false;
 
   const visitors = {
     ClassDeclaration(node) {
       if (node.parent === body)
         changes.push({
-          text: node.id.name + '=',
+          text: `${node.id.name}=`,
           start: node.start,
-          end: node.start,
+          end: node.start
         });
     },
     FunctionDeclaration(node) {
       changes.push({
-        text: node.id.name + '=',
+        text: `${node.id.name}=`,
         start: node.start,
-        end: node.start,
+        end: node.start
       });
       return node;
     },
@@ -147,53 +147,53 @@ export function preProcess(content) {
     },
     VariableDeclaration(node) {
       if (node.kind !== 'var' && node.parent !== body) return;
-      var onlyOneDeclaration = node.declarations.length === 1;
+      const onlyOneDeclaration = node.declarations.length === 1;
       changes.push({
         text: onlyOneDeclaration ? 'void' : 'void (',
         start: node.start,
-        end: node.start + node.kind.length,
+        end: node.start + node.kind.length
       });
-      for (var declaration of node.declarations) {
+      for (const declaration of node.declarations) {
         if (!declaration.init) {
           changes.push({
             text: '(',
             start: declaration.start,
-            end: declaration.start,
+            end: declaration.start
           });
           changes.push({
             text: '=undefined)',
             start: declaration.end,
-            end: declaration.end,
+            end: declaration.end
           });
           continue;
         }
         changes.push({
           text: '(',
           start: declaration.start,
-          end: declaration.start,
+          end: declaration.start
         });
         changes.push({
           text: ')',
           start: declaration.end,
-          end: declaration.end,
+          end: declaration.end
         });
       }
       if (!onlyOneDeclaration) {
         const last = node.declarations[node.declarations.length - 1];
         changes.push({ text: ')', start: last.end, end: last.end });
       }
-    },
+    }
   };
 
   walk.simple(body, visitors);
 
-  var last = body.body[body.body.length - 1];
+  const last = body.body[body.body.length - 1];
   let additionalCode = null;
 
   if (last === undefined) {
     return {
       additionalCode,
-      content,
+      content
     };
   }
 
@@ -201,20 +201,23 @@ export function preProcess(content) {
     changes.push({
       text: 'return window.$_ = (',
       start: last.start,
-      end: last.start,
+      end: last.start
     });
     if (wrapped[last.end - 1] !== ';')
       changes.push({ text: ')', start: last.end, end: last.end });
     else changes.push({ text: ')', start: last.end - 1, end: last.end - 1 });
   }
 
-  if (last.type === 'VariableDeclaration' && (last.kind === 'const' || last.kind === 'let')) {
+  if (
+    last.type === 'VariableDeclaration' &&
+    (last.kind === 'const' || last.kind === 'let')
+  ) {
     additionalCode = `${last.kind} ${last.declarations['0'].id.name} = $_`;
 
     changes.push({
       text: `${last.kind} ${last.declarations['0'].id.name} = window.$_`,
       start: last.start,
-      end: last.declarations['0'].id.end,
+      end: last.declarations['0'].id.end
     });
   }
 
@@ -222,16 +225,16 @@ export function preProcess(content) {
   if (!containsAwait || containsReturn) {
     if (additionalCode) {
       const offset = 14; // length of `(async () => {`
-      content =
-        content.substr(0, last.declarations['0'].id.end - offset) +
-        ' = window.$_' +
-        content.substr(last.declarations['0'].id.end - offset);
+      content = `${content.substr(
+        0,
+        last.declarations['0'].id.end - offset
+      )} = window.$_${content.substr(last.declarations['0'].id.end - offset)}`;
     }
     return { content, additionalCode };
   }
 
   while (changes.length) {
-    var change = changes.pop();
+    const change = changes.pop();
     wrapped =
       wrapped.substr(0, change.start) +
       change.text +

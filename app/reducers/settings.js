@@ -3,7 +3,7 @@ import { SET_THEME, SET_LAYOUT } from '../actions/Settings';
 const defaultState = {
   theme: 'light',
   layout: 'bottom',
-  remote: false,
+  remote: false
 };
 
 const reducer = (state = defaultState, action) => {

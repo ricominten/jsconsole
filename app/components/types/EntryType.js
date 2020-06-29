@@ -6,7 +6,7 @@ import which from '../../lib/which-type';
 
 import * as styles from './Type.styles';
 
-const EntryType = (props) => {
+const EntryType = props => {
   const [open, setOpen] = useState(props.open || false);
   const { value: entry, allowOpen } = props;
 
@@ -18,18 +18,18 @@ const EntryType = (props) => {
   return (
     <div css={styles.wrapperType(open)}>
       <div onClick={() => allowOpen && setOpen(!open)}>
-        <Key allowOpen={open} value={key} />
+        <Key allowOpen={allowOpen} value={key} />
       </div>
       {open && allowOpen && (
         <div css={styles.groupBody(open)}>
           <span css={styles.arbInfo}>value:&nbsp;</span>
           <span css={!open && styles.objectValue}>
-            <Value allowOpen={open} value={value} shallow={false} header={false} />
+            <Value allowOpen={open} value={value} shallow={!open} />
           </span>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default EntryType;

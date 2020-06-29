@@ -7,7 +7,7 @@ import * as styles from './Type.styles';
 
 const LIMIT_CLOSED = 45;
 
-const FunctionType = React.memo((props) => {
+const FunctionType = React.memo(props => {
   const [open, setOpen] = useState(props.open || false);
   const { value, shallow = true, allowOpen } = props;
 
@@ -21,13 +21,15 @@ const FunctionType = React.memo((props) => {
   }, {});
 
   const formattedCode = code.replace(/^function /, '').replace(object.name, '');
-  let condensedCode = formattedCode.replace(/\s\s+/g, ' ').substring(0, LIMIT_CLOSED);
+  let condensedCode = formattedCode
+    .replace(/\s\s+/g, ' ')
+    .substring(0, LIMIT_CLOSED);
 
   console.log(condensedCode);
   console.log(condensedCode.length);
 
   if (condensedCode.length >= LIMIT_CLOSED) {
-    condensedCode = `${condensedCode} … } `
+    condensedCode = `${condensedCode} … } `;
   }
 
   console.log(condensedCode);
@@ -35,13 +37,16 @@ const FunctionType = React.memo((props) => {
 
   return (
     <div css={styles.wrapperType(open)}>
-      <em css={styles.functionType(allowOpen)} onClick={() => allowOpen && setOpen(!open)}>ƒ {object.name || 'function'}</em>
-      {!open && !shallow && (
-        <span>{condensedCode}</span>
-      )}
-      {open && !shallow && (
-        <span>{formattedCode}</span>
-      )}
+      <em
+        css={styles.functionType(allowOpen)}
+        onClick={() => allowOpen && setOpen(!open)}
+      >
+        ƒ 
+{' '}
+{object.name || 'function'}
+      </em>
+      {!open && !shallow && <span>{condensedCode}</span>}
+      {open && !shallow && <span>{formattedCode}</span>}
     </div>
   );
 });

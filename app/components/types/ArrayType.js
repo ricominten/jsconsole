@@ -11,20 +11,21 @@ import * as styles from './Type.styles';
 
 const LIMIT_CLOSED = 10;
 
-const ArrayType = (props) => {
+const ArrayType = props => {
   const [open, setOpen] = useState(props.open || false);
-  const { value, shallow = true, filter = null, allowOpen, header = true } = props;
-  const length = value.length;
+  const {
+    value,
+    shallow = true,
+    filter = null,
+    allowOpen,
+    header = true
+  } = props;
+  const { length } = value;
 
   let types = value.slice(0, open ? value.length : LIMIT_CLOSED).map((_, i) => {
     const Type = which(_);
     return (
-      <Type
-        allowOpen={open}
-        key={uuid()}
-        shallow={!open}
-        value={_}
-      >
+      <Type allowOpen={open} key={uuid()} shallow={!open} value={_}>
         {_}
       </Type>
     );
@@ -40,7 +41,8 @@ const ArrayType = (props) => {
       if (count !== 0 && !hole) {
         newTypes.push(
           <span key={uuid()} css={styles.arbInfo}>
-            &lt;undefined × {count}&gt;
+            &lt;undefined × {count}
+            &gt;
           </span>
         );
         count = 0;
@@ -57,7 +59,8 @@ const ArrayType = (props) => {
     if (count !== 0) {
       newTypes.push(
         <span key={uuid()} css={styles.arbInfo}>
-          &lt;undefined × {count}&gt;
+          &lt;undefined × {count}
+          &gt;
         </span>
       );
     }
@@ -69,7 +72,7 @@ const ArrayType = (props) => {
   if (!open && value.length > LIMIT_CLOSED) {
     types.push(
       <span key={uuid()} css={styles.arbInfo}>
-          …
+        …
       </span>
     );
   }
@@ -88,26 +91,36 @@ const ArrayType = (props) => {
 
   return (
     <div css={styles.wrapperType(open)}>
-      <div css={styles.groupHead} onClick={() => allowOpen && setOpen(!open)} >
+      <div css={styles.groupHead} onClick={() => allowOpen && setOpen(!open)}>
         <em css={styles.arrayType(allowOpen)}>Array</em>
-        <span css={styles.arbInfo}>&nbsp;({length})</span>
-        {!shallow && (<span css={styles.arbStatic}>&nbsp;[</span>)}
+        <span css={styles.arbInfo}>
+&nbsp;({length}
+)
+</span>
+        {!shallow && <span css={styles.arbStatic}>&nbsp;[</span>}
       </div>
       {!shallow && !open && (
-        <div css={styles.groupLine}>&nbsp;{types}&nbsp;</div>
+        <div css={styles.groupLine}>
+          &nbsp;
+          {types}
+          &nbsp;
+        </div>
       )}
       {open && (
-        <div css={styles.groupBody} >
+        <div css={styles.groupBody}>
           {types.map((type, i) => {
             if (
               filter === null ||
               filter === undefined ||
               filter === '' ||
-              (value[i] + '').toLowerCase().includes(filter)
+              `${value[i]}`.toLowerCase().includes(filter)
             ) {
               return (
                 <div css={styles.keyValue} key={uuid()}>
-                  <span>{i}:&nbsp;</span>
+                  <span>
+                    {i}
+                    :&nbsp;
+                  </span>
                   {type}
                 </div>
               );
@@ -117,10 +130,9 @@ const ArrayType = (props) => {
           })}
         </div>
       )}
-      {!shallow && (<span css={styles.arbStatic}>]</span>)}
+      {!shallow && <span css={styles.arbStatic}>]</span>}
     </div>
-
-  )
+  );
 };
 
 export default ArrayType;

@@ -10,7 +10,7 @@ import * as styles from './LineNav.styles';
 import { vh } from './App.styles';
 import Filter from './Filter';
 
-export default (props) => {
+export default props => {
   const [text, setText] = useState(null);
   const [type, setType] = useState({}.toString.call(props.value) || 'string');
   const [filter, setFilter] = useState(false);
@@ -18,15 +18,13 @@ export default (props) => {
 
   const { command, value, onFilter } = props;
 
-
-
-  const onPermalink = (e) => {
+  const onPermalink = e => {
     // let this throw if no support
     window.history.pushState(null, document.title, e.target.search);
     e.preventDefault();
   };
 
-  const preCopy = async() => {
+  const preCopy = async () => {
     // work out how we should copy this thing
     const original = props.value;
     let { value, type } = props;
@@ -76,29 +74,26 @@ export default (props) => {
 
   return (
     <div css={styles.line}>
-      {/*{typeof value === 'object' &&*/}
-      {/*  <Filter*/}
-      {/*    ref={e => (this.filter = e)}*/}
-      {/*    onFilter={onFilter}*/}
-      {/*    enabled={filter}*/}
-      {/*  >*/}
-      {/*    <button onClick={() => setFilter(!filter)} css={styles.button}>*/}
-      {/*      <Icon size="small" type="search" />*/}
-      {/*      <span css={vh}>search</span>*/}
-      {/*    </button>*/}
-      {/*  </Filter>*/}
-      {/*}*/}
-      {command &&
+      {/* {typeof value === 'object' && */}
+      {/*  <Filter */}
+      {/*    ref={e => (this.filter = e)} */}
+      {/*    onFilter={onFilter} */}
+      {/*    enabled={filter} */}
+      {/*  > */}
+      {/*    <button onClick={() => setFilter(!filter)} css={styles.button}> */}
+      {/*      <Icon size="small" type="search" /> */}
+      {/*      <span css={vh}>search</span> */}
+      {/*    </button> */}
+      {/*  </Filter> */}
+      {/* } */}
+      {command && (
         <CopyToClipboard text={`${url}?${escape(command)}`}>
-          <button
-            title="Copy permalink"
-            css={styles.button}
-          >
+          <button title="Copy permalink" css={styles.button}>
             <Icon size="small" type="link" />
             <span css={vh}>copy permalink to clipboard</span>
           </button>
         </CopyToClipboard>
-      }
+      )}
       <CopyToClipboard text={text}>
         <button
           title={copyAs}
@@ -110,9 +105,12 @@ export default (props) => {
           }}
         >
           <Icon size="small" type="copy" />
-          <span css={vh}>{copyAs} to clipboard</span>
+          <span css={vh}>{copyAs}
+{' '}
+to clipboard
+</span>
         </button>
       </CopyToClipboard>
     </div>
   );
-}
+};

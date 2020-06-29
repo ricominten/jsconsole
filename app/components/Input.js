@@ -17,7 +17,7 @@ class Input extends Component {
       value: props.value || '',
       multiline: false,
       rows: 1,
-      historyCursor: props.history.length,
+      historyCursor: props.history.length
     };
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
@@ -25,11 +25,11 @@ class Input extends Component {
 
   onChange() {
     const { value } = this.input;
-    const length = value.split('\n').length;
+    const { length } = value.split('\n');
     this.setState({
       multiline: length > 1,
       rows: length < 20 ? length : 20,
-      value,
+      value
     });
   }
 
@@ -90,7 +90,6 @@ class Input extends Component {
       await this.props.onRun(command);
       // Don't use `this.input.scrollIntoView();` as it messes with iframes
       window.scrollTo(0, document.body.scrollHeight);
-      return;
     }
   }
 

@@ -10,12 +10,13 @@ export const input = css`
 export const textarea = css`
   resize: none;
   background: none;
-  font-family: "Menlo", consolas, monospace;
+  font-family: 'Menlo', consolas, monospace;
   border: 0;
   padding: 0.6rem;
   padding-left: 1.4rem;
   display: block;
   width: 100%;
+  height: auto;
   outline: none;
   font-size: inherit;
   line-height: inherit;

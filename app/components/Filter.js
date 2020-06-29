@@ -1,11 +1,10 @@
 /** @jsx jsx */
 
-import React  from 'react';
+import React from 'react';
 import { jsx } from '@emotion/core';
 import debounce from 'lodash/debounce';
 
 import * as styles from './Filter.styles';
-
 
 class Filter extends React.Component {
   componentDidUpdate(prevProps) {

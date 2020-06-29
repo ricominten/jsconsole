@@ -94,7 +94,7 @@ class Console extends Component {
       error: true,
       html,
       value: args,
-      type: 'log',
+      type: 'log'
     });
   };
 
@@ -109,7 +109,7 @@ class Console extends Component {
       this.push({
         error: true,
         value: rest,
-        type: 'log',
+        type: 'log'
       });
     }
   }
@@ -121,7 +121,7 @@ class Console extends Component {
       value: args,
       html,
       open: true,
-      type: 'log',
+      type: 'log'
     });
   };
 
@@ -132,11 +132,12 @@ class Console extends Component {
       level: 'warn',
       html,
       value: args,
-      type: 'log',
+      type: 'log'
     });
   }
 
   debug = (...args) => this.log(...args);
+
   info = (...args) => this.log(...args);
 
   log(...rest) {
@@ -145,7 +146,7 @@ class Console extends Component {
     this.push({
       value: args,
       html,
-      type: 'log',
+      type: 'log'
     });
   }
 
@@ -163,7 +164,9 @@ class Console extends Component {
           e.stopPropagation(); // prevent the focus on the input element
         }}
       >
-        {keys.map(_ => <Line key={`line-${_}`} {...commands[_]} />)}
+        {keys.map(_ => (
+          <Line key={`line-${_}`} {...commands[_]} />
+        ))}
       </div>
     );
   }

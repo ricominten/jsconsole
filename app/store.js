@@ -1,5 +1,5 @@
-import reducers from './reducers';
 import { createStore, compose, applyMiddleware } from 'redux';
+import reducers from './reducers';
 import { SET_THEME, SET_LAYOUT } from './actions/Settings';
 import { ADD_HISTORY } from './actions/Input';
 
@@ -26,7 +26,7 @@ const middleware = [
     }
 
     return nextAction;
-  }),
+  })
 ];
 
 if (window.__REDUX_DEVTOOLS_EXTENSION__) {

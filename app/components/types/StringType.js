@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { jsx } from '@emotion/core';
 
 import * as styles from './Type.styles';
-import Icon  from '../Icon';
+import Icon from '../Icon';
 
-const StringType = (props) => {
+const StringType = props => {
   const [expanded, setExpanded] = useState(!props.shallow);
-  const { value,  bare = false, html = false  } = props;
+  const { value, bare = false, html = false } = props;
   const multiline = props.value.includes('\n');
 
   return (
@@ -23,12 +23,13 @@ const StringType = (props) => {
           <Icon size={10} type={expanded ? 'collapse' : 'expand'} />
         </button>
       )}
-      {html
-        ? (<span dangerouslySetInnerHTML={{ __html: value }} />)
-        : multiline && !expanded
-          ? (value.replace(/\n/g, '↵'))
-          : (value)
-      }
+      {html ? (
+        <span dangerouslySetInnerHTML={{ __html: value }} />
+      ) : multiline && !expanded ? (
+        value.replace(/\n/g, '↵')
+      ) : (
+        value
+      )}
     </div>
   );
 };

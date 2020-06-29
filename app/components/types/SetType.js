@@ -2,14 +2,14 @@
 
 import React, { useState } from 'react';
 import { jsx } from '@emotion/core';
-import Entry from './EntryType';
 import zip from 'lodash/zip';
 import flatten from 'lodash/flatten';
 import { v4 as uuid } from 'uuid';
+import Entry from './EntryType';
 
 import * as styles from './Type.styles';
 
-const SetType = (props) => {
+const SetType = props => {
   const [open, setOpen] = useState(props.open || false);
   const { value, shallow = true, allowOpen } = props;
   let { displayName } = props;
@@ -18,19 +18,13 @@ const SetType = (props) => {
     displayName = value.constructor ? value.constructor.name : 'Object';
   }
 
-  let length = value.size;
+  const length = value.size;
   let types = [];
   let i = 0;
 
-  for (let entry of value.entries()) {
-    types.push(
-      <Entry
-        key={uuid()}
-        shallow={true}
-        value={entry}
-        allowOpen={open}
-      />
-    );
+  // eslint-disable-next-line no-restricted-syntax,react/prop-types
+  for (const entry of value.entries()) {
+    types.push(<Entry key={uuid()} shallow value={entry} allowOpen={open} />);
 
     i++;
 
@@ -64,14 +58,19 @@ const SetType = (props) => {
 
   return (
     <div css={styles.wrapperType(open)}>
-      <div css={styles.groupHead} onClick={() => allowOpen && setOpen(!open)} >
-        <em css={styles.setType}>{displayName}</em>
-        <span css={styles.arbInfo}>&nbsp;({length})&nbsp;</span>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+      <div css={styles.groupHead} onClick={() => allowOpen && setOpen(!open)}>
+        <em css={styles.setType(allowOpen)}>{displayName}</em>
+        <span css={styles.arbInfo}>
+          &nbsp;(
+          {length}
+          )&nbsp;
+        </span>
       </div>
       {!shallow && !open && (
         <div css={styles.groupLine}>
           <div>{'{ '}</div>
-          {types.map((type) => (
+          {types.map(type => (
             <div css={styles.keyValue} key={uuid()}>
               {type}
             </div>
@@ -80,13 +79,18 @@ const SetType = (props) => {
         </div>
       )}
       {open && (
-        <div >
+        <div>
           <div>{'{'}</div>
           <div css={styles.groupBody}>
-            <span css={styles.arbInfo} key={uuid()}>[[Entries]]:</span>
-            {types.map((type, i) => (
+            <span css={styles.arbInfo} key={uuid()}>
+              [[Entries]]:
+            </span>
+            {types.map((type, index) => (
               <div css={styles.keyValue} key={uuid()}>
-                <span css={styles.arbInfo}>{i}:&nbsp;</span>
+                <span css={styles.arbInfo}>
+                  {index}
+                  :&nbsp;
+                </span>
                 {type}
               </div>
             ))}
@@ -96,6 +100,6 @@ const SetType = (props) => {
       )}
     </div>
   );
-}
+};
 
 export default SetType;

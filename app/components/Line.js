@@ -12,7 +12,7 @@ class Line extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: null,
+      filter: null
     };
   }
 
@@ -24,13 +24,13 @@ class Line extends Component {
     return false; // this prevents bananas amount of rendering
   }
 
-  getIcon = (icon) => {
+  getIcon = icon => {
     return (
       <IconContainer position="absolute">
         <Icon size={12} type={icon} />
       </IconContainer>
-    )
-  }
+    );
+  };
 
   render() {
     const {
@@ -40,7 +40,7 @@ class Line extends Component {
       error = false,
       open = false,
       html = false,
-      onFocus = () => { },
+      onFocus = () => {}
     } = this.props;
 
     let line = null;
@@ -66,7 +66,6 @@ class Line extends Component {
       // value, which is nicer for the user
       line = (
         <div css={[styles.prompt, error && styles.error]}>
-
           {type !== 'log' && this.getIcon(error ? 'error' : 'out')}
           <LineNav
             onFilter={filter => {
@@ -89,7 +88,7 @@ class Line extends Component {
                   html={html}
                   value={value}
                   open={open}
-                  allowOpen={true}
+                  allowOpen
                   bare={type === 'log'}
                   key={`type-${i}`}
                   shallow={false}

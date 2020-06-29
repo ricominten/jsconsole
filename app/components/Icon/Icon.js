@@ -1,6 +1,6 @@
 /** @jsx jsx */
 
-import React  from 'react';
+import React from 'react';
 import { jsx } from '@emotion/core';
 
 import Collapse from './Collapse';
@@ -15,40 +15,40 @@ import Prompt from './Prompt';
 import Search from './Search';
 import Share from './Share';
 
-export default ({size, type}) => {
+export default ({ size, type }) => {
   let Tag;
   switch (type) {
-    case ('collapse'):
+    case 'collapse':
       Tag = Collapse;
       break;
-    case ('copy'):
+    case 'copy':
       Tag = Copy;
       break;
-    case ('error'):
+    case 'error':
       Tag = Error;
       break;
-    case ('expand'):
+    case 'expand':
       Tag = Expand;
       break;
-    case ('in'):
+    case 'in':
       Tag = In;
       break;
-    case ('info'):
+    case 'info':
       Tag = Info;
       break;
-    case ('link'):
+    case 'link':
       Tag = Link;
       break;
-    case ('out'):
+    case 'out':
       Tag = Out;
       break;
-    case ('prompt'):
+    case 'prompt':
       Tag = Prompt;
       break;
-    case ('search'):
+    case 'search':
       Tag = Search;
       break;
-    case ('share'):
+    case 'share':
       Tag = Share;
       break;
   }
@@ -58,10 +58,8 @@ export default ({size, type}) => {
   if (typeof size === 'number') {
     dimension = size;
   } else {
-    dimension = size === 'small' ? "14" : "24";
+    dimension = size === 'small' ? '14' : '24';
   }
 
-  return (
-    <Tag dimension={dimension}/>
-  )
-}
+  return <Tag dimension={dimension} />;
+};

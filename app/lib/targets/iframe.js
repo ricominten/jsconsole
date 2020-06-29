@@ -1,4 +1,4 @@
-/*global document */
+/* global document */
 export const container = document.createElement('iframe');
 container.width = container.height = 1;
 container.style.opacity = 0;
@@ -11,7 +11,7 @@ document.body.appendChild(container);
 export default function run(command) {
   const res = {
     error: false,
-    command,
+    command
   };
 
   try {

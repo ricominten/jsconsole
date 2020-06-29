@@ -162,9 +162,7 @@ export default class MenuBuilder {
         {
           label: 'Documentation',
           click() {
-            shell.openExternal(
-              ''
-            );
+            shell.openExternal('');
           }
         },
         {

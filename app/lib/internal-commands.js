@@ -1,8 +1,9 @@
-/*global window EventSource fetch */
-import { getContainer } from './run';
+/* global window EventSource fetch */
 import isUrl from 'is-url';
+import { getContainer } from './run';
 
 const version = require('electron').remote.app.getVersion();
+
 const API = process.env.REACT_APP_API || '';
 
 // Missing support
@@ -11,7 +12,7 @@ const API = process.env.REACT_APP_API || '';
 const welcome = () => ({
   value: `Use <strong>:help</strong> to show jsconsole commands
 version: ${version}`,
-  html: true,
+  html: true
 });
 
 const help = () => ({
@@ -25,13 +26,13 @@ const help = () => ({
 copy(<value>) and $_ for last value
 
 ${about().value}`,
-  html: true,
+  html: true
 });
 
 const about = () => ({
   value:
     'Built by <a href="https://twitter.com/ricominten" target="_blank">@ricominten</a> • <a href="https://github.com/" target="_blank">open source</a> • <a href="ko-fi.me/ricominten" target="_blank">donate</a>',
-  html: true,
+  html: true
 });
 
 const load = async ({ args: urls, console }) => {
@@ -74,7 +75,7 @@ const theme = async ({ args: [theme], app }) => {
 };
 
 const history = async ({ app, args: [n = null] }) => {
-  const history = app.context.store.getState().history;
+  const { history } = app.context.store.getState();
   if (n === null) {
     return history.map((item, i) => `${i}: ${item.trim()}`).join('\n');
   }
@@ -84,8 +85,6 @@ const history = async ({ app, args: [n = null] }) => {
   if (command) {
     app.onRun(command);
   }
-
-  return;
 };
 
 const clear = ({ console }) => {
@@ -101,9 +100,7 @@ const listen = async ({ args: [id], console: internalConsole }) => {
     const sse = new EventSource(`${API}/remote/${id}/log`);
     sse.onopen = () => {
       resolve(
-        `Connected to "${id}"\n\n<script src="${
-          window.location.origin
-        }/js/remote.js?${id}"></script>`
+        `Connected to "${id}"\n\n<script src="${window.location.origin}/js/remote.js?${id}"></script>`
       );
     };
 
@@ -148,7 +145,7 @@ const commands = {
   history,
   set,
   welcome,
-  version: () => version,
+  version: () => version
 };
 
 export default commands;

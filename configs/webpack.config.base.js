@@ -33,8 +33,8 @@ export default {
       },
       {
         test: /\.(jpe?g|png|ttf|svg|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-        use: 'url-loader',
-      },
+        use: 'url-loader'
+      }
     ]
   },
 

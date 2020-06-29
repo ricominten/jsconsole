@@ -15,7 +15,7 @@ export const iconExpand = css`
   background-size: contain;
   height: 8px;
   width: 8px;
-  
+
   :hover {
     background-color: transparent;
     box-shadow: none;
@@ -23,16 +23,13 @@ export const iconExpand = css`
 `;
 
 export const iconCopy = css`
-   
   background-image: url(${copyImg});
 `;
 
 export const iconLink = css`
-   
   background-image: url(${linkImg});
 `;
 
 export const iconSearch = css`
-   
   background-image: url(${searchImg});
 `;

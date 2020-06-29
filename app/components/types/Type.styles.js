@@ -1,10 +1,10 @@
 import { css } from '@emotion/core';
 
-//*** TYPE STYLES ***//
+/* ** TYPE STYLES ** */
 
 export const type = css`
   display: inline-block;
-  
+
   & + & {
     margin-left: 0.75rem;
   }
@@ -12,31 +12,31 @@ export const type = css`
 
 export const stringType = (expanded, bare) => {
   const str = css`
-  position: relative;
-  color: #4CAF50;
-  white-space: nowrap;
+    position: relative;
+    color: #4caf50;
+    white-space: nowrap;
   `;
 
   let toggleString = ``;
   if (expanded) {
     toggleString = css`
-    white-space: normal;
-    white-space: pre-wrap;
+      white-space: normal;
+      white-space: pre-wrap;
     `;
   }
 
   let bareString;
   if (bare) {
     bareString = css`
-    color: #111;
+      color: #111;
     `;
   } else {
     bareString = css`
-    :before,
-    :after {
-      content: '"';
-      color: #111;
-    }
+      :before,
+      :after {
+        content: '"';
+        color: #111;
+      }
     `;
   }
 
@@ -51,70 +51,45 @@ export const numberType = css`
   color: #0000c0;
 `;
 
-export const setType = css`
-  color: #2196f3;
-  
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-export const arrayType = (canOpen = false) => {
+const openable = (canOpen = false) => {
   if (!canOpen) {
-    return css`color: #1976D2;`;
+    return css`
+      color: #1976d2;
+    `;
   }
   return css`
     color: #2196f3;
     cursor: pointer;
-    
+
     &:hover {
       text-decoration: underline;
     }
-  `
+  `;
 };
 
-export const objectType = (canOpen = false, error = false) => {
-  if (!canOpen) {
-    return css`color: ${error ? '#f44336' : '#1976D2'};`
-  }
-  return css`
-    color: ${error ? '#f44336' : '#2196f3'};
-    cursor: pointer;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  `
-};
+export const arrayType = openable;
+
+export const objectType = openable;
+
+export const functionType = openable;
+
+export const promiseType = openable;
+
+export const setType = openable;
 
 export const boolType = css`
-  color: #E91E63;
+  color: #e91e63;
 `;
 
-export const functionType = (canOpen = false) => {
-  if (!canOpen) {
-    return css`color: #1976D2;`;
-  }
-  return css`
-    color: #2196f3;
-    cursor: pointer;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  `
-};
-
 export const nullType = css`
-  color: #9C27B0;
+  color: #9c27b0;
 `;
 
 export const undefinedType = css`
   color: #aaa;
 `;
 
-
-//*** SECTIONS STYLES ***//
+/* SECTIONS STYLES */
 
 export const wrapperType = (open, error = false) => {
   const background = error ? '#ffefef' : 'transparent';
@@ -123,17 +98,16 @@ export const wrapperType = (open, error = false) => {
       display: flex;
       overflow-x: auto;
       background: ${background};
-      
+
       * {
         display: flex;
       }
     `;
-  } else {
-    return css`
-      overflow-x: auto;
-      background: ${background};
-    `;
   }
+  return css`
+    overflow-x: auto;
+    background: ${background};
+  `;
 };
 
 export const groupHead = css`
@@ -150,17 +124,16 @@ export const groupBody = (open = true) => {
     return css`
       margin-left: 0.5rem;
     `;
-  } else {
-    return css`
-      margin-left: 0.5rem;
-      display: flex;
-    `;
   }
+  return css`
+    margin-left: 0.5rem;
+    display: flex;
+  `;
 };
 
 export const objectKey = css`
   color: #979797;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 `;
 
 export const objectValue = css`
@@ -195,20 +168,6 @@ export const keyValue = css`
   .closed & {
     display: inline;
   }
-`;
-
-export const globalType = css`
-.type.object.closed .header,
-.type.object.closed .group,
-.type.object.closed .group > div {
-  display: inline;
-}
-
-.type.closed .type {
-  display: inline;
-}
-
-
 `;
 
 export const expandButton = css`

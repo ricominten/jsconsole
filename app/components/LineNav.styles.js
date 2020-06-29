@@ -5,8 +5,8 @@ export const line = css`
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: .25rem;
-  top: .5rem;
+  right: 0.25rem;
+  top: 0.5rem;
   z-index: 10;
   user-select: none;
 `;

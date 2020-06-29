@@ -23,19 +23,19 @@ class App extends Component {
   }
 
   async onRun(command) {
-    const console = this.console;
+    const { console } = this;
 
     if (command[0] !== ':') {
       console.push({
         type: 'command',
         command,
-        value: command,
+        value: command
       });
       const res = await run(command);
       console.push({
         command,
         type: 'response',
-        ...res,
+        ...res
       });
       return;
     }
@@ -52,7 +52,7 @@ class App extends Component {
         command,
         error: true,
         value: new Error(`No such jsconsole command "${command}"`),
-        type: 'response',
+        type: 'response'
       });
       return;
     }
@@ -67,11 +67,9 @@ class App extends Component {
       console.push({
         command,
         type: 'log',
-        ...res,
+        ...res
       });
     }
-
-    return;
   }
 
   componentDidMount() {
@@ -105,8 +103,8 @@ class App extends Component {
         ref={e => (this.app = e)}
         className={className}
       >
-        <Global styles={styles.global}/>
-        <Global styles={styles.app}/>
+        <Global styles={styles.global} />
+        <Global styles={styles.app} />
         <Console
           ref={e => (this.console = e)}
           commands={commands}

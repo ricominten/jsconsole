@@ -14,8 +14,9 @@ import SymbolType from '../components/types/SymbolType';
 function whichType(value) {
   let type = '[object Object]';
   try {
-    type = ({}).toString.call(value);
-  } catch (e) { // only happens when typeof is protected (...randomly)
+    type = {}.toString.call(value);
+  } catch (e) {
+    // only happens when typeof is protected (...randomly)
   }
 
   if (type === '[object String]') {
@@ -59,7 +60,7 @@ function whichType(value) {
   }
 
   if (type === '[object Symbol]') {
-    return SymbolType
+    return SymbolType;
   }
 
   // TODO DOM nodes, etc.
