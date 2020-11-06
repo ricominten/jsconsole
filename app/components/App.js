@@ -123,6 +123,7 @@ class App extends Component {
   }
 }
 
+// eslint-disable-next-line react/forbid-prop-types
 App.contextTypes = { store: PropTypes.object };
 
 export default App;

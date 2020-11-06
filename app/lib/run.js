@@ -29,6 +29,16 @@ export const bindConsole = __console => {
 
 export const getContainer = () => container;
 
+export function setContainer(iframe) {
+  container = iframe;
+  const win = container.contentWindow;
+  const doc = container.contentDocument;
+
+  win.copy = copy;
+  win.$$ = s => Array.from(doc.querySelectorAll(s));
+  win.$ = s => doc.querySelector(s);
+}
+
 export function createContainer() {
   container = document.createElement('iframe');
   container.width = container.height = 1;
@@ -39,16 +49,6 @@ export function createContainer() {
   container.setAttribute('name', '<proxy>');
   document.body.appendChild(container);
   setContainer(container);
-}
-
-export function setContainer(iframe) {
-  container = iframe;
-  const win = container.contentWindow;
-  const doc = container.contentDocument;
-
-  win.copy = copy;
-  win.$$ = s => Array.from(doc.querySelectorAll(s));
-  win.$ = s => doc.querySelector(s);
 }
 
 export default async function run(command) {

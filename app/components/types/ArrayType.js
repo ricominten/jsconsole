@@ -93,10 +93,7 @@ const ArrayType = props => {
     <div css={styles.wrapperType(open)}>
       <div css={styles.groupHead} onClick={() => allowOpen && setOpen(!open)}>
         <em css={styles.arrayType(allowOpen)}>Array</em>
-        <span css={styles.arbInfo}>
-&nbsp;({length}
-)
-</span>
+        <span css={styles.arbInfo}>&nbsp;({length})</span>
         {!shallow && <span css={styles.arbStatic}>&nbsp;[</span>}
       </div>
       {!shallow && !open && (

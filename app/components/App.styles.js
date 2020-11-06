@@ -9,6 +9,7 @@ export const global = css`
   html,
   #root {
     height: 100%;
+    background: #fff;
   }
 
   body {

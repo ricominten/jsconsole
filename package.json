@@ -1,6 +1,6 @@
 {
   "name": "js-console-electron",
-  "productName": "JSConsole Electron",
+  "productName": "JSConsole",
   "version": "0.0.1",
   "description": "jsconsole packaged in an electron app",
   "scripts": {
@@ -16,7 +16,7 @@
     "lint-fix": "yarn --silent lint --fix; exit 0",
     "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
     "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
-    "package": "yarn build && electron-builder build --publish never",
+    "package": "cross-env NODE_ENV=production yarn build && electron-builder build --publish never",
     "package-all": "yarn build && electron-builder build -mwl",
     "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
     "package-mac": "yarn build && electron-builder build --mac",
@@ -53,7 +53,7 @@
   },
   "build": {
     "productName": "JSConsole",
-    "appId": "org.develar.ElectronReact",
+    "appId": "dev.jsconsole.app",
     "files": [
       "dist/",
       "node_modules/",
@@ -94,12 +94,7 @@
       "buildResources": "resources",
       "output": "release"
     },
-    "publish": {
-      "provider": "github",
-      "owner": "Rico Minten",
-      "repo": null,
-      "private": false
-    }
+    "publish": null
   },
   "repository": {
     "type": "git",
@@ -257,7 +252,8 @@
     "yarn": "^1.21.1"
   },
   "dependencies": {
-    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/babel-preset-css-prop": "^10.1.0",
+    "@emotion/cache": "^10.0.29",
     "@emotion/core": "^10.0.28",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@hot-loader/react-dom": "^16.13.0",
@@ -326,7 +322,6 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
     }
   }
 }
