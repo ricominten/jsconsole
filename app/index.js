@@ -3,8 +3,8 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/core';
-import store from './store/store';
-import App from './containers/App';
+import store from '../base/store/store';
+import App from '../base/containers/App';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const emotionCache = createCache({

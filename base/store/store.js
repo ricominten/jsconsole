@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import reducers from '../reducers';
+import reducers from '../reducers/index';
 import { SET_THEME, SET_LAYOUT } from '../actions/Settings';
 import { ADD_HISTORY } from '../actions/Input';
 

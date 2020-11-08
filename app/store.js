@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import reducers from './reducers';
-import { SET_THEME, SET_LAYOUT } from './actions/Settings';
-import { ADD_HISTORY } from './actions/Input';
+import reducers from '../base/reducers';
+import { SET_THEME, SET_LAYOUT } from '../base/actions/Settings';
+import { ADD_HISTORY } from '../base/actions/Input';
 
 const save = (key, value, store = 'session') => {
   try {

@@ -7,7 +7,7 @@ import Collapse from './Collapse';
 import Copy from './Copy';
 import Error from './Error';
 import Expand from './Expand';
-import In from './in';
+import In from './In';
 import Info from './Info';
 import Link from './Link';
 import Out from './Out';
