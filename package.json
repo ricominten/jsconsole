@@ -1,7 +1,7 @@
 {
   "name": "js-console-electron",
   "productName": "JSConsole",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "jsconsole packaged in an electron app",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -67,6 +67,7 @@
       "category": "public.app-category.utilities"
     },
     "dmg": {
+      "artifactName": "${productName}-${os}-${arch}.${ext}",
       "contents": [
         {
           "x": 130,
@@ -81,12 +82,14 @@
       ]
     },
     "win": {
+      "artifactName": "${productName}-${os}-${arch}.${ext}",
       "target": [
         "nsis",
         "msi"
       ]
     },
     "linux": {
+      "artifactName": "${productName}-${os}-${arch}.${ext}",
       "target": [
         "deb",
         "rpm",
@@ -102,7 +105,7 @@
   },
   "repository": {
     "type": "git",
-    "url": null
+    "url": "https://github.com/ricominten/jsconsole"
   },
   "author": {
     "name": "Rico Minten",
@@ -111,7 +114,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": null
+    "url": "https://github.com/ricominten/jsconsole/issues"
   },
   "keywords": [
     "electron",
